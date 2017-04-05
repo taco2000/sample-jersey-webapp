@@ -13,5 +13,17 @@ pipeline {
                 sh "mvn test"
             }
         }
+
+        stage("Static Analysis") {
+            steps {
+                sh "mvn pmd:pmd findbugs:findbugs"
+            }
+        }
+
+        stage ("Package") {
+            steps {
+                sh "mvn package"
+            }
+        }
     }
 }
