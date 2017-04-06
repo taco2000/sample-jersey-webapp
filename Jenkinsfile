@@ -30,12 +30,13 @@ pipeline {
         }
 
         stage ("Bump Release Version") {
+            when {
+                return BRANCH_NAME == "master"
+            }
             steps {
                 echo "Bumping release version"
             }
-        } when {
-            return BRANCH_NAME == "master"
-        }
+        } 
     }
 
     /*
