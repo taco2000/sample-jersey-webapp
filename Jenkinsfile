@@ -25,9 +25,11 @@ pipeline {
                 sh "mvn package"
             }
         }
+    }
 
-        // Perform a release if on the master branch
-        if (BRANCH_NAME == "master") {
+    // Perform a release if on the master branch
+    if (BRANCH_NAME == "master") {
+        stages {
             stage ("Bump Release Version") {
                 steps{
                     echo "Bumping release version"
