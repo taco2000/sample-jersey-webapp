@@ -9,8 +9,8 @@ pipeline {
 
         stage ("Unit Test") {
             steps {
-                step(sh "mvn test")
-                step([$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml'])
+                step{sh "mvn test"}
+                step{[$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml']}
             }
         }
 
