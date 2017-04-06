@@ -9,8 +9,8 @@ pipeline {
 
         stage ("Unit Test") {
             steps {
-                step{sh "mvn test"}
-                step{[$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml']}
+                sh "mvn test"
+                step([$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml'])
             }
         }
 
@@ -26,7 +26,8 @@ pipeline {
             }
         }
 
-        if (BRANCH_NAME == 'master') {
+        // Perform a release if on the master branch
+        if ${BRANCH_NAME} == "master") {
             stage ("Bump Release Version") {
                 steps{
                     echo "Bumping release version"
