@@ -36,28 +36,23 @@ pipeline {
             steps {
                 echo "Bumping release version"
             }
-        } 
-    }
-
-    /*
-    // Perform a release if on the master branch
-    stages {
-        stage ("Bump Release Version") {
-            steps{
-                echo "Bumping release version"
-            }
         }
+
         stage ("Update changelog") {
+            when {
+                expression {return BRANCH_NAME == "master" }
+            }            
             steps{
                 echo "Updating changelog"
             }
         }
         stage ("Publish release artifacts") {
+            when {
+                expression {return BRANCH_NAME == "master" }
+            }            
             steps{
                 echo "Publish release artifacts"
             }
         }
-    } when {
-        return BRANCH_NAME == "master"
-    }*/
+    }
 }
