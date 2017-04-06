@@ -27,7 +27,7 @@ pipeline {
         }
 
         // Perform a release if on the master branch
-        if {BRANCH_NAME == "master") {
+        if (BRANCH_NAME == "master") {
             stage ("Bump Release Version") {
                 steps{
                     echo "Bumping release version"
