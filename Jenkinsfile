@@ -10,7 +10,9 @@ pipeline {
         stage ("Unit Test") {
             steps {
                 sh "mvn test"
-                step([$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml'])
+                junit '*/target/surefire-reports/*.xml'
+                //junit allowEmptyResults: true, testResults: 'test/*.xml'
+                //step([$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml'])
             }
         }
 
