@@ -5,12 +5,12 @@ pipeline {
             steps {
                 sh "mvn clean compile"
             }
-            
         }
 
         stage ("Unit Test") {
             steps {
-                sh "mvn test"
+                step(sh "mvn test")
+                step([$class: 'JUnitResultArchiver', testDataPublishers: [[$class: 'AttachmentPublisher']], testResults: 'test/*.xml'])
             }
         }
 
@@ -23,6 +23,24 @@ pipeline {
         stage ("Package") {
             steps {
                 sh "mvn package"
+            }
+        }
+
+        if (BRANCH_NAME == 'master') {
+            stage ("Bump Release Version") {
+                steps{
+                    echo "Bumping release version"
+                }
+            }
+            stage ("Update changelog") {
+                steps{
+                    echo "Updating changelog"
+                }
+            }
+            stage ("Publish release artifacts") {
+                steps{
+                    echo "Publish release artifacts"
+                }
             }
         }
     }
