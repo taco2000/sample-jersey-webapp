@@ -27,11 +27,9 @@ pipeline {
         }
 
         stage ("Bump Release Version") {
-            steps{
+            steps {
                 echo "Bumping release version"
             }
-        } when {
-            return BRANCH_NAME == "master"
         }
     }
 
