@@ -28,23 +28,23 @@ pipeline {
     }
 
     // Perform a release if on the master branch
-    if (BRANCH_NAME == "master") {
-        stages {
-            stage ("Bump Release Version") {
-                steps{
-                    echo "Bumping release version"
-                }
-            }
-            stage ("Update changelog") {
-                steps{
-                    echo "Updating changelog"
-                }
-            }
-            stage ("Publish release artifacts") {
-                steps{
-                    echo "Publish release artifacts"
-                }
+    stages {
+        stage ("Bump Release Version") {
+            steps{
+                echo "Bumping release version"
             }
         }
+        stage ("Update changelog") {
+            steps{
+                echo "Updating changelog"
+            }
+        }
+        stage ("Publish release artifacts") {
+            steps{
+                echo "Publish release artifacts"
+            }
+        }
+    } when {
+        return BRANCH_NAME == "master"
     }
 }
