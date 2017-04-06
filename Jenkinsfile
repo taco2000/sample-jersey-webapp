@@ -25,8 +25,17 @@ pipeline {
                 sh "mvn package"
             }
         }
+
+        stage ("Bump Release Version") {
+            steps{
+                echo "Bumping release version"
+            }
+        } when {
+            return BRANCH_NAME == "master"
+        }
     }
 
+    /*
     // Perform a release if on the master branch
     stages {
         stage ("Bump Release Version") {
@@ -46,5 +55,5 @@ pipeline {
         }
     } when {
         return BRANCH_NAME == "master"
-    }
+    }*/
 }
